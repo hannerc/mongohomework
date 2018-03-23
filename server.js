@@ -4,14 +4,29 @@ var request = require("request");
 var express = require("express");
 var mongojs = require("mongojs");
 var mongoose = require("mongoose");
+var bodyParser = require("body-parser");
+var logger = require("morgan");
 
 // Initialize Express
 var app = express();
 
-// Database configuration
-// Save the URL of our database as well as the name of our collection
-var databaseUrl = "mongoHeadlines";
-var collections = ["headlines"];
+
+// Configure middleware
+
+// Use morgan logger for logging requests
+app.use(logger("dev"));
+
+// Use body-parser for handling form submissions
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Use express.static to serve the public folder as a static directory
+app.use(express.static("public"));
+
+
+// // Database configuration
+// // Save the URL of our database as well as the name of our collection
+// var databaseUrl = "mongoHeadlines";
+// var collections = ["headlines"];
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
