@@ -2,10 +2,20 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Scraping With Mongoose</title>
+    <title>TrekNews</title>
     <style>
       body { 
         background-color: black;
+        
+       }
+
+     /*  #notes{
+          background-image: url("bg.jepg");
+        background-color: #cccccc;
+       }*/
+       .articleins{
+        color: cyan;
+        font-family: arial;
        }
       h1{
         color:yellow;
@@ -29,7 +39,10 @@
 
       }
 
-      
+      .note_title{
+        color:orange;
+        font-family: arial;
+      }
       #notes {
         float: right;
         width: 30%;
@@ -47,11 +60,15 @@
         height: 200px;
         font-size: 18px;
       }
+
+      a{
+        color:orange;
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
-      <h1>TrekNews!</h1>
+      <h1>TrekNews!</h1><p class="articleins">Click an article to make a note!</p>
     
       <div id="articles"></div>
       <div id="notes"></div>

@@ -3,7 +3,7 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     
-    $("#articles").append("<h3 data-id='" + data[i]._id + "'></h3><h3 class='article_title clickforNote'>" + data[i].title + "</h3><p class='clickforNote'>" + data[i].link + "</p>");
+    $("#articles").append("<h3 data-id='" + data[i]._id + "' class='article_title clickforNote'>" + data[i].title + "</h3><a href='" + data[i].link + "' class='clickforNote'>" + data[i].link + "</a>");
   }
 });
 // Whenever someone clicks a p tag
@@ -13,6 +13,7 @@ $(document).on("click", ".clickforNote", function() {
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
   // Now make an ajax call for the Article
+  console.log(thisId);
   $.ajax({
     method: "GET",
     url: "/articles/" + thisId
@@ -21,7 +22,7 @@ $(document).on("click", ".clickforNote", function() {
     .then(function(data) {
       console.log(data);
       // The title of the article
-     $("#notes").append("<h2>" + data.title + "</h2>");
+    $("#notes").append("<h2 class='note_title'>" + data.title + "</h2>");
       // An input to enter a new title
      //$("#notes").append("<input id='titleinput' name='title' >");
       // A textarea to add a new note body
@@ -31,7 +32,7 @@ $(document).on("click", ".clickforNote", function() {
       // If there's a note in the article
       if (data.note) {
         // Place the title of the note in the title input
-       // $("#titleinput").val(data.note.title);
+       //$("#titleinput").val(data.note.title);
         // Place the body of the note in the body textarea
         $("#bodyinput").val(data.note.body);
       }
@@ -47,7 +48,7 @@ $(document).on("click", "#savenote", function() {
     url: "/articles/" + thisId,
     data: {
       // Value taken from title input
-      title: $("#titleinput").val(),
+     // title: $("#titleinput").val(),
       // Value taken from note textarea
       body: $("#bodyinput").val()
     }
@@ -60,6 +61,6 @@ $(document).on("click", "#savenote", function() {
       $("#notes").empty();
     });
   // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
+  //$("#titleinput").val("");
   $("#bodyinput").val("");
 });
